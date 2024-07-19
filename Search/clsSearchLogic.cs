@@ -1,80 +1,50 @@
-﻿using System;
-using System.Collections;
+﻿using GroupProject_Car_Dealership_Prototype.Common;
+using System;
+using System.ComponentModel;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics.Eventing.Reader;
+using GroupProject_Car_Dealership_Prototype.Common;
+using GroupProject_Car_Dealership_Prototype.Search;
 
 namespace GroupProject_Car_Dealership_Prototype.Search
 {
-  
-    //add variables
-
-
-    internal class clsSearchLogic
+    public class clsSearchLogic
     {
-
-        /// <summary>
-        /// Initializes Global Variables
-        /// </summary>
-        public clsSearchLogic() { }
-
-        /// <summary>
-        /// Reterns Array List Of all Items Inside of Invetory. 
-        /// </summary>
-        /// <returns></returns>
-        public ArrayList getAllInvoices()
+        clsDataAccess db;
+        clsSearchSQL sql;
+        DataSet ds;
+        private string selectedInvoiceID;
+        public string selectedInvoice
         {
-            //TODO
-            return null;
+            get { return selectedInvoiceID; }
+            set { selectedInvoiceID = value; }
         }
 
-        /// <summary>
-        /// Reterns Array List Of all Invoices numbers. 
-        /// </summary>
-        /// <returns></returns>
-        public ArrayList getAllInvoicesNumbers()
+        public clsSearchLogic()
         {
-            //TODO
-            return null;
+            sql = new clsSearchSQL();
+            db = new clsDataAccess();
+            ds = sql.fillSearchTable();
         }
-
-        /// <summary>
-        /// Reterns Array List Of all Invoices customer Names. 
-        /// </summary>
-        /// <returns></returns>
-        public ArrayList getAllInvoicesNames()
+        public DataSet refineSearch(string date, string charge)
         {
-            //TODO
-            return null;
-        }
-
-        /// <summary>
-        /// Reterns Array List Of all Invoices dates 
-        /// </summary>
-        /// <returns></returns>
-        public ArrayList getAllInvoicesDate()
-        {
-            //TODO
-            return null;
-        }
-
-        /// <summary>
-        /// Reterns Array List Of all Invoices total cost . 
-        /// </summary>
-        /// <returns></returns>
-        public ArrayList getAllInvoicesTotalCost()
-        {
-            //TODO
-            return null;
-        }
-
-        /// <summary>
-        /// Gets invoice selected by user
-        /// </summary>
-        public void getInvoice()
-        {
-
+            if (string.IsNullOrEmpty(date))
+            {
+                return sql.refineFromCharge(charge);
+            }
+            else if (string.IsNullOrEmpty(charge))
+            {
+                return sql.refineFromDate(date);
+            }
+            else
+            {
+                return sql.refineFromMultiple(date, charge);
+            }
         }
     }
+
 }
