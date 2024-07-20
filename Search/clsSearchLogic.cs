@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Diagnostics.Eventing.Reader;
 using GroupProject_Car_Dealership_Prototype.Common;
 using GroupProject_Car_Dealership_Prototype.Search;
-using GroupProject_Prototype.Common;
 
 namespace GroupProject_Car_Dealership_Prototype.Search
 {
