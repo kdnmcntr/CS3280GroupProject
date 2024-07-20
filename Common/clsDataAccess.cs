@@ -6,8 +6,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.OleDb;
 
-namespace GroupProject_Prototype.Common
+
+namespace GroupProject_Car_Dealership_Prototype.Common
 {
     public class clsDataAccess
     {
